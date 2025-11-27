@@ -3,9 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World</title>
+    <title>English-Korean Bible</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <p>Hello, world.</p>
+    <header>
+        <div class="navigation">
+            <select id="bookSelect" aria-label="Select book">
+                <option value="">Select a book...</option>
+            </select>
+            <select id="chapterSelect" aria-label="Select chapter">
+                <option value="">Select a chapter...</option>
+            </select>
+            <select id="verseSelect" aria-label="Select verse">
+                <option value="">Go to verse...</option>
+            </select>
+        </div>
+    </header>
+
+    <main>
+        <div class="bible-container">
+            <div class="column english-column">
+                <div id="englishText" class="text-content"></div>
+            </div>
+            <div class="column korean-column">
+                <div id="koreanText" class="text-content"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/app.js"></script>
 </body>
 </html>
