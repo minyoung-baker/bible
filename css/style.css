@@ -160,10 +160,6 @@ main {
 
 /* Mobile Responsive Design */
 @media (max-width: 768px) {
-    header h1 {
-        font-size: 1.25rem;
-    }
-
     .navigation {
         flex-direction: column;
         gap: 0.5rem;
@@ -175,28 +171,27 @@ main {
     }
 
     main {
-        padding: 0.5rem;
+        padding: 0.25rem;
     }
 
     .bible-container {
-        grid-template-columns: 1fr;
-        gap: 0;
+        gap: 0.25rem;
     }
 
     .column {
-        height: auto;
-        max-height: 50vh;
-        padding: 1rem;
-    }
-
-    .english-column {
-        border-right: none;
-        border-bottom: 2px solid var(--border-color);
+        padding: 0.5rem;
+        font-size: 0.85rem;
     }
 
     .verse {
-        font-size: 0.95rem;
-        margin-bottom: 0.75rem;
+        font-size: 0.85rem;
+        margin-bottom: 0.5rem;
+        line-height: 1.6;
+    }
+
+    .verse-number {
+        font-size: 0.75rem;
+        min-width: 1.5rem;
     }
 }
 
