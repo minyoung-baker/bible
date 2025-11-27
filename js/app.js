@@ -76,6 +76,17 @@ class BibleApp {
         koreanColumn.addEventListener('scroll', () => {
             this.syncScroll(koreanColumn, englishColumn);
         });
+
+        // Re-sync verse heights on window resize
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                if (this.englishText.children.length > 0) {
+                    this.syncVerseHeights();
+                }
+            }, 250);
+        });
     }
 
     syncScroll(source, target) {
@@ -186,6 +197,36 @@ class BibleApp {
         // Reset scroll position
         document.querySelector('.english-column').scrollTop = 0;
         document.querySelector('.korean-column').scrollTop = 0;
+
+        // Synchronize verse heights for perfect alignment
+        this.syncVerseHeights();
+    }
+
+    syncVerseHeights() {
+        // Get all verses from both columns
+        const englishVerses = this.englishText.querySelectorAll('.verse');
+        const koreanVerses = this.koreanText.querySelectorAll('.verse');
+
+        // Reset any previous height settings
+        englishVerses.forEach(verse => verse.style.minHeight = '');
+        koreanVerses.forEach(verse => verse.style.minHeight = '');
+
+        // Force a reflow to get accurate natural heights
+        void this.englishText.offsetHeight;
+
+        // Match each verse pair to the taller of the two
+        englishVerses.forEach((englishVerse, index) => {
+            const koreanVerse = koreanVerses[index];
+            if (!koreanVerse) return;
+
+            const englishHeight = englishVerse.offsetHeight;
+            const koreanHeight = koreanVerse.offsetHeight;
+            const maxHeight = Math.max(englishHeight, koreanHeight);
+
+            // Set both verses to the same height
+            englishVerse.style.minHeight = `${maxHeight}px`;
+            koreanVerse.style.minHeight = `${maxHeight}px`;
+        });
     }
 
     createVerseElement(number, text) {

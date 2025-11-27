@@ -105,19 +105,22 @@ main {
     margin-bottom: 1rem;
     line-height: 1.8;
     font-size: 1rem;
+    display: flex;
+    align-items: flex-start;
+    box-sizing: border-box;
 }
 
 .verse-number {
-    display: inline-block;
     font-weight: bold;
     color: var(--accent-color);
     margin-right: 0.5rem;
     min-width: 2rem;
     font-size: 0.9rem;
+    flex-shrink: 0;
 }
 
 .verse-text {
-    display: inline;
+    flex: 1;
 }
 
 /* Loading State */
