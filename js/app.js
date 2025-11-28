@@ -392,6 +392,11 @@ class BibleApp {
                 <p>Select a book and chapter to begin reading</p>
                 <p>English translation from <a href="https://github.com/thiagobodruk/bible/blob/master/json/en_bbe.json">https://github.com/thiagobodruk</a></p>
                 <p>Korean translation from <a href="https://github.com/thiagobodruk/bible/blob/master/json/ko_ko.json">https://github.com/thiagobodruk</a></p>
+                <p>Other sources used:<br>
+                <a href="https://get.bible/bible-data-sets">https://get.bible/bible-data-sets</a><br>
+                <a href="https://github.com/getbible/v2">https://github.com/getbible/v2</a><br>
+                <a href="https://scripture.api.bible">https://scripture.api.bible</a><br>
+                </p>
             </div>
         `;
         this.englishText.innerHTML = welcomeHTML;

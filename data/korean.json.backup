@@ -1,0 +1,334 @@
+{
+  "books": [
+    {
+      "name": "Genesis",
+      "abbreviation": "GN",
+      "chapters": []
+    },
+    {
+      "name": "Exodus",
+      "abbreviation": "EX",
+      "chapters": []
+    },
+    {
+      "name": "Leviticus",
+      "abbreviation": "LV",
+      "chapters": []
+    },
+    {
+      "name": "Numbers",
+      "abbreviation": "NM",
+      "chapters": []
+    },
+    {
+      "name": "Deuteronomy",
+      "abbreviation": "DT",
+      "chapters": []
+    },
+    {
+      "name": "Joshua",
+      "abbreviation": "JS",
+      "chapters": []
+    },
+    {
+      "name": "Judges",
+      "abbreviation": "JUD",
+      "chapters": []
+    },
+    {
+      "name": "Ruth",
+      "abbreviation": "RT",
+      "chapters": []
+    },
+    {
+      "name": "1 Samuel",
+      "abbreviation": "1SM",
+      "chapters": []
+    },
+    {
+      "name": "2 Samuel",
+      "abbreviation": "2SM",
+      "chapters": []
+    },
+    {
+      "name": "1 Kings",
+      "abbreviation": "1KGS",
+      "chapters": []
+    },
+    {
+      "name": "2 Kings",
+      "abbreviation": "2KGS",
+      "chapters": []
+    },
+    {
+      "name": "1 Chronicles",
+      "abbreviation": "1CH",
+      "chapters": []
+    },
+    {
+      "name": "2 Chronicles",
+      "abbreviation": "2CH",
+      "chapters": []
+    },
+    {
+      "name": "Ezra",
+      "abbreviation": "EZR",
+      "chapters": []
+    },
+    {
+      "name": "Nehemiah",
+      "abbreviation": "NE",
+      "chapters": []
+    },
+    {
+      "name": "Esther",
+      "abbreviation": "ET",
+      "chapters": []
+    },
+    {
+      "name": "Job",
+      "abbreviation": "JOB",
+      "chapters": []
+    },
+    {
+      "name": "Psalms",
+      "abbreviation": "PS",
+      "chapters": []
+    },
+    {
+      "name": "Proverbs",
+      "abbreviation": "PRV",
+      "chapters": []
+    },
+    {
+      "name": "Ecclesiastes",
+      "abbreviation": "EC",
+      "chapters": []
+    },
+    {
+      "name": "Song of Solomon",
+      "abbreviation": "SO",
+      "chapters": []
+    },
+    {
+      "name": "Isaiah",
+      "abbreviation": "IS",
+      "chapters": []
+    },
+    {
+      "name": "Jeremiah",
+      "abbreviation": "JR",
+      "chapters": []
+    },
+    {
+      "name": "Lamentations",
+      "abbreviation": "LM",
+      "chapters": []
+    },
+    {
+      "name": "Ezekiel",
+      "abbreviation": "EZ",
+      "chapters": []
+    },
+    {
+      "name": "Daniel",
+      "abbreviation": "DN",
+      "chapters": []
+    },
+    {
+      "name": "Hosea",
+      "abbreviation": "HO",
+      "chapters": []
+    },
+    {
+      "name": "Joel",
+      "abbreviation": "JL",
+      "chapters": []
+    },
+    {
+      "name": "Amos",
+      "abbreviation": "AM",
+      "chapters": []
+    },
+    {
+      "name": "Obadiah",
+      "abbreviation": "OB",
+      "chapters": []
+    },
+    {
+      "name": "Jonah",
+      "abbreviation": "JN",
+      "chapters": []
+    },
+    {
+      "name": "Micah",
+      "abbreviation": "MI",
+      "chapters": []
+    },
+    {
+      "name": "Nahum",
+      "abbreviation": "NA",
+      "chapters": []
+    },
+    {
+      "name": "Habakkuk",
+      "abbreviation": "HK",
+      "chapters": []
+    },
+    {
+      "name": "Zephaniah",
+      "abbreviation": "ZP",
+      "chapters": []
+    },
+    {
+      "name": "Haggai",
+      "abbreviation": "HG",
+      "chapters": []
+    },
+    {
+      "name": "Zechariah",
+      "abbreviation": "ZC",
+      "chapters": []
+    },
+    {
+      "name": "Malachi",
+      "abbreviation": "ML",
+      "chapters": []
+    },
+    {
+      "name": "Matthew",
+      "abbreviation": "MT",
+      "chapters": []
+    },
+    {
+      "name": "Mark",
+      "abbreviation": "MK",
+      "chapters": []
+    },
+    {
+      "name": "Luke",
+      "abbreviation": "LK",
+      "chapters": []
+    },
+    {
+      "name": "John",
+      "abbreviation": "JO",
+      "chapters": []
+    },
+    {
+      "name": "Acts",
+      "abbreviation": "ACT",
+      "chapters": []
+    },
+    {
+      "name": "Romans",
+      "abbreviation": "RM",
+      "chapters": []
+    },
+    {
+      "name": "1 Corinthians",
+      "abbreviation": "1CO",
+      "chapters": []
+    },
+    {
+      "name": "2 Corinthians",
+      "abbreviation": "2CO",
+      "chapters": []
+    },
+    {
+      "name": "Galatians",
+      "abbreviation": "GL",
+      "chapters": []
+    },
+    {
+      "name": "Ephesians",
+      "abbreviation": "EPH",
+      "chapters": []
+    },
+    {
+      "name": "Philippians",
+      "abbreviation": "PH",
+      "chapters": []
+    },
+    {
+      "name": "Colossians",
+      "abbreviation": "CL",
+      "chapters": []
+    },
+    {
+      "name": "1 Thessalonians",
+      "abbreviation": "1TS",
+      "chapters": []
+    },
+    {
+      "name": "2 Thessalonians",
+      "abbreviation": "2TS",
+      "chapters": []
+    },
+    {
+      "name": "1 Timothy",
+      "abbreviation": "1TM",
+      "chapters": []
+    },
+    {
+      "name": "2 Timothy",
+      "abbreviation": "2TM",
+      "chapters": []
+    },
+    {
+      "name": "Titus",
+      "abbreviation": "TT",
+      "chapters": []
+    },
+    {
+      "name": "Philemon",
+      "abbreviation": "PHM",
+      "chapters": []
+    },
+    {
+      "name": "Hebrews",
+      "abbreviation": "HB",
+      "chapters": []
+    },
+    {
+      "name": "James",
+      "abbreviation": "JM",
+      "chapters": []
+    },
+    {
+      "name": "1 Peter",
+      "abbreviation": "1PE",
+      "chapters": []
+    },
+    {
+      "name": "2 Peter",
+      "abbreviation": "2PE",
+      "chapters": []
+    },
+    {
+      "name": "1 John",
+      "abbreviation": "1JO",
+      "chapters": []
+    },
+    {
+      "name": "2 John",
+      "abbreviation": "2JO",
+      "chapters": []
+    },
+    {
+      "name": "3 John",
+      "abbreviation": "3JO",
+      "chapters": []
+    },
+    {
+      "name": "Jude",
+      "abbreviation": "JD",
+      "chapters": []
+    },
+    {
+      "name": "Revelation",
+      "abbreviation": "RE",
+      "chapters": []
+    }
+  ]
+}
