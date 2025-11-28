@@ -13,6 +13,10 @@ class BibleApp {
         this.verseSelect = document.getElementById('verseSelect');
         this.englishText = document.getElementById('englishText');
         this.koreanText = document.getElementById('koreanText');
+        this.prevBookBtn = document.getElementById('prevBook');
+        this.nextBookBtn = document.getElementById('nextBook');
+        this.prevChapterBtn = document.getElementById('prevChapter');
+        this.nextChapterBtn = document.getElementById('nextChapter');
 
         this.init();
     }
@@ -64,6 +68,12 @@ class BibleApp {
         this.verseSelect.addEventListener('change', (e) => {
             this.onVerseChange(e.target.value);
         });
+
+        // Navigation buttons
+        this.prevBookBtn.addEventListener('click', () => this.navigateBook(-1));
+        this.nextBookBtn.addEventListener('click', () => this.navigateBook(1));
+        this.prevChapterBtn.addEventListener('click', () => this.navigateChapter(-1));
+        this.nextChapterBtn.addEventListener('click', () => this.navigateChapter(1));
 
         // Synchronized scrolling
         const englishColumn = document.querySelector('.english-column');
@@ -124,6 +134,7 @@ class BibleApp {
             this.verseSelect.innerHTML = '<option value="">Go to verse...</option>';
             this.verseSelect.disabled = true;
             this.clearContent();
+            this.updateNavigationButtons();
             return;
         }
 
@@ -135,6 +146,7 @@ class BibleApp {
         this.verseSelect.disabled = true;
 
         this.populateChapterSelect();
+        this.updateNavigationButtons();
     }
 
     populateChapterSelect() {
@@ -161,11 +173,13 @@ class BibleApp {
     onChapterChange(chapterIndex) {
         if (chapterIndex === '') {
             this.clearContent();
+            this.updateNavigationButtons();
             return;
         }
 
         this.currentChapterIndex = parseInt(chapterIndex);
         this.displayChapter();
+        this.updateNavigationButtons();
     }
 
     displayChapter() {
@@ -293,6 +307,49 @@ class BibleApp {
         }
     }
 
+    navigateBook(direction) {
+        if (this.currentBookIndex === null) return;
+
+        const newIndex = this.currentBookIndex + direction;
+        if (newIndex >= 0 && newIndex < this.englishData.books.length) {
+            this.bookSelect.value = newIndex;
+            this.onBookChange(newIndex);
+        }
+    }
+
+    navigateChapter(direction) {
+        if (this.currentBookIndex === null || this.currentChapterIndex === null) return;
+
+        const englishBook = this.englishData.books[this.currentBookIndex];
+        const newChapterIndex = this.currentChapterIndex + direction;
+
+        if (newChapterIndex >= 0 && newChapterIndex < englishBook.chapters.length) {
+            this.chapterSelect.value = newChapterIndex;
+            this.onChapterChange(newChapterIndex);
+        }
+    }
+
+    updateNavigationButtons() {
+        // Update book navigation buttons
+        if (this.currentBookIndex === null) {
+            this.prevBookBtn.disabled = true;
+            this.nextBookBtn.disabled = true;
+        } else {
+            this.prevBookBtn.disabled = this.currentBookIndex === 0;
+            this.nextBookBtn.disabled = this.currentBookIndex === this.englishData.books.length - 1;
+        }
+
+        // Update chapter navigation buttons
+        if (this.currentBookIndex === null || this.currentChapterIndex === null) {
+            this.prevChapterBtn.disabled = true;
+            this.nextChapterBtn.disabled = true;
+        } else {
+            const englishBook = this.englishData.books[this.currentBookIndex];
+            this.prevChapterBtn.disabled = this.currentChapterIndex === 0;
+            this.nextChapterBtn.disabled = this.currentChapterIndex === englishBook.chapters.length - 1;
+        }
+    }
+
     showWelcomeMessage() {
         const welcomeHTML = `
             <div class="empty-state">
@@ -307,6 +364,7 @@ class BibleApp {
                 <p>읽기 시작하려면 책과 장을 선택하세요</p>
             </div>
         `;
+        this.updateNavigationButtons();
     }
 
     clearContent() {
