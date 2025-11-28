@@ -50,16 +50,22 @@ header h1 {
 }
 
 .nav-btn {
-    padding: 0.5rem;
-    font-size: 1rem;
+    padding: 0.5rem 0.6rem;
+    font-size: 1.1rem;
     border: none;
     border-radius: 4px;
     background-color: var(--white);
     color: var(--text-color);
     cursor: pointer;
-    min-width: 2rem;
+    min-width: 2.2rem;
+    width: 2.2rem;
+    height: 2.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: all 0.3s ease;
-    font-weight: bold;
+    font-weight: normal;
+    line-height: 1;
 }
 
 .nav-btn:hover:not(:disabled) {
@@ -196,9 +202,11 @@ main {
     }
 
     .nav-btn {
-        padding: 0.4rem 0.3rem;
-        font-size: 0.9rem;
-        min-width: 1.8rem;
+        padding: 0.3rem;
+        font-size: 1rem;
+        min-width: 1.9rem;
+        width: 1.9rem;
+        height: 1.9rem;
     }
 
     select {

@@ -26,7 +26,12 @@ class BibleApp {
             await this.loadBibleData();
             this.setupEventListeners();
             this.populateBookSelect();
-            this.showWelcomeMessage();
+
+            // Load Genesis Chapter 1 by default
+            this.bookSelect.value = 0;
+            this.onBookChange(0);
+            this.chapterSelect.value = 0;
+            this.onChapterChange(0);
         } catch (error) {
             console.error('Error initializing app:', error);
             this.showError('Failed to load Bible data. Please refresh the page.');
@@ -163,11 +168,9 @@ class BibleApp {
 
         this.chapterSelect.disabled = false;
 
-        // Auto-select first chapter if only one chapter exists
-        if (englishBook.chapters.length === 1) {
-            this.chapterSelect.value = 0;
-            this.onChapterChange(0);
-        }
+        // Auto-select first chapter
+        this.chapterSelect.value = 0;
+        this.onChapterChange(0);
     }
 
     onChapterChange(chapterIndex) {
