@@ -153,6 +153,20 @@ main {
     flex: 1;
 }
 
+/* Missing verse placeholder styling */
+.missing-verse {
+    opacity: 0.5;
+    font-style: italic;
+}
+
+.missing-verse .verse-number {
+    color: #999;
+}
+
+.missing-verse .verse-text {
+    color: #999;
+}
+
 /* Loading State */
 .loading {
     text-align: center;

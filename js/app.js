@@ -190,21 +190,46 @@ class BibleApp {
         this.englishText.innerHTML = '';
         this.koreanText.innerHTML = '';
 
-        // Populate verse selector
-        this.populateVerseSelect(englishChapter.verses.length);
+        // Get verse counts for both languages
+        const englishVerseCount = englishChapter.verses.length;
+        const koreanVerseCount = koreanChapter.verses.length;
+        const maxVerseCount = Math.max(englishVerseCount, koreanVerseCount);
 
-        // Display verses
-        englishChapter.verses.forEach((englishVerse, index) => {
-            const koreanVerse = koreanChapter.verses[index];
+        // Populate verse selector with the maximum verse count
+        this.populateVerseSelect(maxVerseCount);
 
-            // English verse
-            const englishVerseElement = this.createVerseElement(englishVerse.number, englishVerse.text);
-            this.englishText.appendChild(englishVerseElement);
+        // Check for mismatch and display warning if present
+        if (englishVerseCount !== koreanVerseCount) {
+            console.warn(`Verse count mismatch in ${englishBook.name} Chapter ${englishChapter.number}: English=${englishVerseCount}, Korean=${koreanVerseCount}`);
+        }
 
-            // Korean verse
-            const koreanVerseElement = this.createVerseElement(koreanVerse.number, koreanVerse.text);
-            this.koreanText.appendChild(koreanVerseElement);
-        });
+        // Display verses - iterate through all verses from both languages
+        for (let i = 0; i < maxVerseCount; i++) {
+            const englishVerse = englishChapter.verses[i];
+            const koreanVerse = koreanChapter.verses[i];
+
+            // English verse (or placeholder if missing)
+            if (englishVerse) {
+                const englishVerseElement = this.createVerseElement(englishVerse.number, englishVerse.text);
+                this.englishText.appendChild(englishVerseElement);
+            } else {
+                // Create placeholder for missing English verse
+                const verseNumber = i + 1;
+                const englishVerseElement = this.createVerseElement(verseNumber, '[Verse not available in English translation]', true);
+                this.englishText.appendChild(englishVerseElement);
+            }
+
+            // Korean verse (or placeholder if missing)
+            if (koreanVerse) {
+                const koreanVerseElement = this.createVerseElement(koreanVerse.number, koreanVerse.text);
+                this.koreanText.appendChild(koreanVerseElement);
+            } else {
+                // Create placeholder for missing Korean verse
+                const verseNumber = i + 1;
+                const koreanVerseElement = this.createVerseElement(verseNumber, '[한국어 번역에서 사용할 수 없는 구절]', true);
+                this.koreanText.appendChild(koreanVerseElement);
+            }
+        }
 
         // Reset scroll position
         document.querySelector('.english-column').scrollTop = 0;
@@ -241,10 +266,15 @@ class BibleApp {
         });
     }
 
-    createVerseElement(number, text) {
+    createVerseElement(number, text, isMissing = false) {
         const verseDiv = document.createElement('div');
         verseDiv.className = 'verse';
         verseDiv.setAttribute('data-verse', number);
+
+        // Add missing-verse class for placeholder verses
+        if (isMissing) {
+            verseDiv.classList.add('missing-verse');
+        }
 
         const verseNumber = document.createElement('span');
         verseNumber.className = 'verse-number';

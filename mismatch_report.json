@@ -1,0 +1,418 @@
+[
+  {
+    "book": "Genesis",
+    "koreanBook": "창세기",
+    "chapter": 30,
+    "englishVerses": 43,
+    "koreanVerses": 31,
+    "difference": 12
+  },
+  {
+    "book": "Genesis",
+    "koreanBook": "창세기",
+    "chapter": 33,
+    "englishVerses": 20,
+    "koreanVerses": 19,
+    "difference": 1
+  },
+  {
+    "book": "Exodus",
+    "koreanBook": "출애굽기",
+    "chapter": 1,
+    "englishVerses": 22,
+    "koreanVerses": 21,
+    "difference": 1
+  },
+  {
+    "book": "Numbers",
+    "koreanBook": "민수기",
+    "chapter": 10,
+    "englishVerses": 36,
+    "koreanVerses": 34,
+    "difference": 2
+  },
+  {
+    "book": "Numbers",
+    "koreanBook": "민수기",
+    "chapter": 27,
+    "englishVerses": 23,
+    "koreanVerses": 22,
+    "difference": 1
+  },
+  {
+    "book": "Deuteronomy",
+    "koreanBook": "신명기",
+    "chapter": 22,
+    "englishVerses": 30,
+    "koreanVerses": 29,
+    "difference": 1
+  },
+  {
+    "book": "Joshua",
+    "koreanBook": "여호수아",
+    "chapter": 10,
+    "englishVerses": 43,
+    "koreanVerses": 41,
+    "difference": 2
+  },
+  {
+    "book": "Joshua",
+    "koreanBook": "여호수아",
+    "chapter": 15,
+    "englishVerses": 63,
+    "koreanVerses": 62,
+    "difference": 1
+  },
+  {
+    "book": "Judges",
+    "koreanBook": "사사기",
+    "chapter": 9,
+    "englishVerses": 57,
+    "koreanVerses": 56,
+    "difference": 1
+  },
+  {
+    "book": "1 Samuel",
+    "koreanBook": "사무엘상",
+    "chapter": 7,
+    "englishVerses": 17,
+    "koreanVerses": 16,
+    "difference": 1
+  },
+  {
+    "book": "1 Samuel",
+    "koreanBook": "사무엘상",
+    "chapter": 17,
+    "englishVerses": 58,
+    "koreanVerses": 57,
+    "difference": 1
+  },
+  {
+    "book": "1 Samuel",
+    "koreanBook": "사무엘상",
+    "chapter": 30,
+    "englishVerses": 31,
+    "koreanVerses": 30,
+    "difference": 1
+  },
+  {
+    "book": "1 Kings",
+    "koreanBook": "열왕기상",
+    "chapter": 1,
+    "englishVerses": 53,
+    "koreanVerses": 52,
+    "difference": 1
+  },
+  {
+    "book": "1 Kings",
+    "koreanBook": "열왕기상",
+    "chapter": 22,
+    "englishVerses": 53,
+    "koreanVerses": 52,
+    "difference": 1
+  },
+  {
+    "book": "1 Chronicles",
+    "koreanBook": "역대상",
+    "chapter": 2,
+    "englishVerses": 55,
+    "koreanVerses": 54,
+    "difference": 1
+  },
+  {
+    "book": "2 Chronicles",
+    "koreanBook": "역대하",
+    "chapter": 7,
+    "englishVerses": 22,
+    "koreanVerses": 21,
+    "difference": 1
+  },
+  {
+    "book": "Esther",
+    "koreanBook": "에스더",
+    "chapter": 4,
+    "englishVerses": 17,
+    "koreanVerses": 14,
+    "difference": 3
+  },
+  {
+    "book": "Job",
+    "koreanBook": "욥기",
+    "chapter": 36,
+    "englishVerses": 33,
+    "koreanVerses": 24,
+    "difference": 9
+  },
+  {
+    "book": "Job",
+    "koreanBook": "욥기",
+    "chapter": 38,
+    "englishVerses": 41,
+    "koreanVerses": 30,
+    "difference": 11
+  },
+  {
+    "book": "Job",
+    "koreanBook": "욥기",
+    "chapter": 39,
+    "englishVerses": 30,
+    "koreanVerses": 24,
+    "difference": 6
+  },
+  {
+    "book": "Job",
+    "koreanBook": "욥기",
+    "chapter": 41,
+    "englishVerses": 34,
+    "koreanVerses": 17,
+    "difference": 17
+  },
+  {
+    "book": "Job",
+    "koreanBook": "욥기",
+    "chapter": 42,
+    "englishVerses": 17,
+    "koreanVerses": 0,
+    "difference": 17
+  },
+  {
+    "book": "Psalms",
+    "koreanBook": "시편",
+    "chapter": 8,
+    "englishVerses": 9,
+    "koreanVerses": 8,
+    "difference": 1
+  },
+  {
+    "book": "Psalms",
+    "koreanBook": "시편",
+    "chapter": 16,
+    "englishVerses": 11,
+    "koreanVerses": 9,
+    "difference": 2
+  },
+  {
+    "book": "Psalms",
+    "koreanBook": "시편",
+    "chapter": 36,
+    "englishVerses": 12,
+    "koreanVerses": 11,
+    "difference": 1
+  },
+  {
+    "book": "Psalms",
+    "koreanBook": "시편",
+    "chapter": 38,
+    "englishVerses": 22,
+    "koreanVerses": 20,
+    "difference": 2
+  },
+  {
+    "book": "Psalms",
+    "koreanBook": "시편",
+    "chapter": 72,
+    "englishVerses": 20,
+    "koreanVerses": 19,
+    "difference": 1
+  },
+  {
+    "book": "Psalms",
+    "koreanBook": "시편",
+    "chapter": 75,
+    "englishVerses": 10,
+    "koreanVerses": 9,
+    "difference": 1
+  },
+  {
+    "book": "Psalms",
+    "koreanBook": "시편",
+    "chapter": 76,
+    "englishVerses": 13,
+    "koreanVerses": 12,
+    "difference": 1
+  },
+  {
+    "book": "Psalms",
+    "koreanBook": "시편",
+    "chapter": 80,
+    "englishVerses": 19,
+    "koreanVerses": 18,
+    "difference": 1
+  },
+  {
+    "book": "Psalms",
+    "koreanBook": "시편",
+    "chapter": 92,
+    "englishVerses": 15,
+    "koreanVerses": 13,
+    "difference": 2
+  },
+  {
+    "book": "Psalms",
+    "koreanBook": "시편",
+    "chapter": 104,
+    "englishVerses": 35,
+    "koreanVerses": 34,
+    "difference": 1
+  },
+  {
+    "book": "Psalms",
+    "koreanBook": "시편",
+    "chapter": 118,
+    "englishVerses": 29,
+    "koreanVerses": 9,
+    "difference": 20
+  },
+  {
+    "book": "Proverbs",
+    "koreanBook": "잠언",
+    "chapter": 10,
+    "englishVerses": 32,
+    "koreanVerses": 30,
+    "difference": 2
+  },
+  {
+    "book": "Proverbs",
+    "koreanBook": "잠언",
+    "chapter": 11,
+    "englishVerses": 31,
+    "koreanVerses": 30,
+    "difference": 1
+  },
+  {
+    "book": "Proverbs",
+    "koreanBook": "잠언",
+    "chapter": 13,
+    "englishVerses": 25,
+    "koreanVerses": 24,
+    "difference": 1
+  },
+  {
+    "book": "Ecclesiastes",
+    "koreanBook": "전도서",
+    "chapter": 5,
+    "englishVerses": 20,
+    "koreanVerses": 19,
+    "difference": 1
+  },
+  {
+    "book": "Isaiah",
+    "koreanBook": "이사야",
+    "chapter": 13,
+    "englishVerses": 22,
+    "koreanVerses": 21,
+    "difference": 1
+  },
+  {
+    "book": "Isaiah",
+    "koreanBook": "이사야",
+    "chapter": 32,
+    "englishVerses": 20,
+    "koreanVerses": 19,
+    "difference": 1
+  },
+  {
+    "book": "Isaiah",
+    "koreanBook": "이사야",
+    "chapter": 37,
+    "englishVerses": 38,
+    "koreanVerses": 36,
+    "difference": 2
+  },
+  {
+    "book": "Jeremiah",
+    "koreanBook": "예레미야",
+    "chapter": 1,
+    "englishVerses": 19,
+    "koreanVerses": 18,
+    "difference": 1
+  },
+  {
+    "book": "Jeremiah",
+    "koreanBook": "예레미야",
+    "chapter": 51,
+    "englishVerses": 64,
+    "koreanVerses": 63,
+    "difference": 1
+  },
+  {
+    "book": "Jeremiah",
+    "koreanBook": "예레미야",
+    "chapter": 52,
+    "englishVerses": 34,
+    "koreanVerses": 33,
+    "difference": 1
+  },
+  {
+    "book": "Acts",
+    "koreanBook": "사도행전",
+    "chapter": 23,
+    "englishVerses": 35,
+    "koreanVerses": 34,
+    "difference": 1
+  },
+  {
+    "book": "2 Corinthians",
+    "koreanBook": "고린도후서",
+    "chapter": 13,
+    "englishVerses": 14,
+    "koreanVerses": 13,
+    "difference": 1
+  },
+  {
+    "book": "Colossians",
+    "koreanBook": "골로새서",
+    "chapter": 4,
+    "englishVerses": 18,
+    "koreanVerses": 9,
+    "difference": 9
+  },
+  {
+    "book": "2 Timothy",
+    "koreanBook": "디모데후서",
+    "chapter": 4,
+    "englishVerses": 22,
+    "koreanVerses": 21,
+    "difference": 1
+  },
+  {
+    "book": "1 Peter",
+    "koreanBook": "베드로전서",
+    "chapter": 2,
+    "englishVerses": 25,
+    "koreanVerses": 22,
+    "difference": 3
+  },
+  {
+    "book": "1 Peter",
+    "koreanBook": "베드로전서",
+    "chapter": 3,
+    "englishVerses": 22,
+    "koreanVerses": 19,
+    "difference": 3
+  },
+  {
+    "book": "1 Peter",
+    "koreanBook": "베드로전서",
+    "chapter": 4,
+    "englishVerses": 19,
+    "koreanVerses": 14,
+    "difference": 5
+  },
+  {
+    "book": "1 Peter",
+    "koreanBook": "베드로전서",
+    "chapter": 5,
+    "englishVerses": 14,
+    "koreanVerses": 0,
+    "difference": 14
+  },
+  {
+    "book": "3 John",
+    "koreanBook": "요한3서",
+    "chapter": 1,
+    "englishVerses": 15,
+    "koreanVerses": 14,
+    "difference": 1
+  }
+]
