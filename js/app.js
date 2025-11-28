@@ -353,6 +353,8 @@ class BibleApp {
             <div class="empty-state">
                 <p>Welcome to the English-Korean Bible</p>
                 <p>Select a book and chapter to begin reading</p>
+                <p>English translation from <a href="https://github.com/thiagobodruk/bible/blob/master/json/en_bbe.json">https://github.com/thiagobodruk</a></p>
+                <p>Korean translation from <a href="https://github.com/thiagobodruk/bible/blob/master/json/ko_ko.json">https://github.com/thiagobodruk</a></p>
             </div>
         `;
         this.englishText.innerHTML = welcomeHTML;
