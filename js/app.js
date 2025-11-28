@@ -306,7 +306,14 @@ class BibleApp {
     }
 
     navigateBook(direction) {
-        if (this.currentBookIndex === null) return;
+        // If no book is selected, handle "next" button to go to Genesis
+        if (this.currentBookIndex === null) {
+            if (direction === 1) {
+                this.bookSelect.value = 0;
+                this.onBookChange(0);
+            }
+            return;
+        }
 
         const newIndex = this.currentBookIndex + direction;
         if (newIndex >= 0 && newIndex < this.englishData.books.length) {
@@ -331,7 +338,7 @@ class BibleApp {
         // Update book navigation buttons
         if (this.currentBookIndex === null) {
             this.prevBookBtn.disabled = true;
-            this.nextBookBtn.disabled = true;
+            this.nextBookBtn.disabled = false; // Enable next button to navigate to Genesis
         } else {
             this.prevBookBtn.disabled = this.currentBookIndex === 0;
             this.nextBookBtn.disabled = this.currentBookIndex === this.englishData.books.length - 1;
