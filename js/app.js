@@ -26,12 +26,7 @@ class BibleApp {
             await this.loadBibleData();
             this.setupEventListeners();
             this.populateBookSelect();
-
-            // Load Genesis Chapter 1 by default
-            this.bookSelect.value = 0;
-            this.onBookChange(0);
-            this.chapterSelect.value = 0;
-            this.onChapterChange(0);
+            this.showWelcomeMessage();
         } catch (error) {
             console.error('Error initializing app:', error);
             this.showError('Failed to load Bible data. Please refresh the page.');
