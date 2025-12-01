@@ -22,6 +22,10 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 /* Header Styles */
@@ -102,9 +106,13 @@ select:focus {
 
 /* Main Content */
 main {
-    padding: 1rem;
+    padding: 0;
     max-width: 1400px;
     margin: 0 auto;
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    width: 100%;
 }
 
 .bible-container {
@@ -112,15 +120,15 @@ main {
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
     background-color: var(--white);
-    border-radius: 8px;
     box-shadow: var(--shadow);
     overflow: hidden;
+    flex: 1;
 }
 
 .column {
     padding: 1.5rem;
     overflow-y: auto;
-    height: calc(100vh - 140px);
+    height: 100%;
 }
 
 .english-column {
@@ -235,7 +243,7 @@ main {
     }
 
     main {
-        padding: 0.25rem;
+        padding: 0;
     }
 
     .bible-container {
