@@ -11,6 +11,7 @@ class BibleApp {
         this.bookSelect = document.getElementById('bookSelect');
         this.chapterSelect = document.getElementById('chapterSelect');
         this.verseSelect = document.getElementById('verseSelect');
+        this.fontSizeSelect = document.getElementById('fontSizeSelect');
         this.englishText = document.getElementById('englishText');
         this.koreanText = document.getElementById('koreanText');
         this.prevBookBtn = document.getElementById('prevBook');
@@ -27,6 +28,8 @@ class BibleApp {
             this.setupEventListeners();
             this.populateBookSelect();
             this.showWelcomeMessage();
+            // Apply default font size
+            this.onFontSizeChange(this.fontSizeSelect.value);
         } catch (error) {
             console.error('Error initializing app:', error);
             this.showError('Failed to load Bible data. Please refresh the page.');
@@ -67,6 +70,11 @@ class BibleApp {
         // Verse selection
         this.verseSelect.addEventListener('change', (e) => {
             this.onVerseChange(e.target.value);
+        });
+
+        // Font size selection
+        this.fontSizeSelect.addEventListener('change', (e) => {
+            this.onFontSizeChange(e.target.value);
         });
 
         // Navigation buttons
@@ -332,6 +340,39 @@ class BibleApp {
 
             // Reset verse selector
             this.verseSelect.value = '';
+        }
+    }
+
+    onFontSizeChange(size) {
+        console.log('Font size change requested:', size);
+
+        // Map size names to actual font sizes
+        const fontSizeMap = {
+            'small': '0.875rem',
+            'medium': '1rem',
+            'large': '1.125rem',
+            'xlarge': '1.25rem'
+        };
+
+        const fontSize = fontSizeMap[size] || '1rem';
+        console.log('Setting font size to:', fontSize);
+
+        // Directly set font-size on all verse elements
+        const allVerses = document.querySelectorAll('.verse');
+        console.log('Found', allVerses.length, 'verse elements');
+
+        allVerses.forEach(verse => {
+            verse.style.fontSize = fontSize;
+        });
+
+        console.log('Font size applied to all verses');
+
+        // Re-sync verse heights after font size change
+        if (allVerses.length > 0) {
+            // Use a small delay to allow the browser to reflow
+            setTimeout(() => {
+                this.syncVerseHeights();
+            }, 50);
         }
     }
 
