@@ -6,7 +6,8 @@
       "Bash(node check_mismatches.js:*)",
       "WebSearch",
       "WebFetch(domain:raw.githubusercontent.com)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(node --check:*)"
     ],
     "deny": [],
     "ask": []

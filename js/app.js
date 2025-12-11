@@ -7,11 +7,16 @@ class BibleApp {
         this.currentChapterIndex = null;
         this.isSyncing = false;
 
+        // Font size management
+        this.fontSizes = ['small', 'medium', 'large', 'xlarge', 'xxlarge', 'xxxlarge', 'huge', 'massive'];
+        this.currentFontSizeIndex = 1; // Start at 'medium'
+
         // DOM Elements
         this.bookSelect = document.getElementById('bookSelect');
         this.chapterSelect = document.getElementById('chapterSelect');
         this.verseSelect = document.getElementById('verseSelect');
-        this.fontSizeSelect = document.getElementById('fontSizeSelect');
+        this.fontSizeDown = document.getElementById('fontSizeDown');
+        this.fontSizeUp = document.getElementById('fontSizeUp');
         this.englishText = document.getElementById('englishText');
         this.koreanText = document.getElementById('koreanText');
         this.prevBookBtn = document.getElementById('prevBook');
@@ -29,7 +34,7 @@ class BibleApp {
             this.populateBookSelect();
             this.showWelcomeMessage();
             // Apply default font size
-            this.onFontSizeChange(this.fontSizeSelect.value);
+            this.applyFontSize();
         } catch (error) {
             console.error('Error initializing app:', error);
             this.showError('Failed to load Bible data. Please refresh the page.');
@@ -72,10 +77,9 @@ class BibleApp {
             this.onVerseChange(e.target.value);
         });
 
-        // Font size selection
-        this.fontSizeSelect.addEventListener('change', (e) => {
-            this.onFontSizeChange(e.target.value);
-        });
+        // Font size buttons
+        this.fontSizeDown.addEventListener('click', () => this.decreaseFontSize());
+        this.fontSizeUp.addEventListener('click', () => this.increaseFontSize());
 
         // Navigation buttons
         this.prevBookBtn.addEventListener('click', () => this.navigateBook(-1));
@@ -245,6 +249,9 @@ class BibleApp {
 
         // Synchronize verse heights for perfect alignment
         this.syncVerseHeights();
+
+        // Enable font size buttons when content is displayed
+        this.updateFontSizeButtons();
     }
 
     syncVerseHeights() {
@@ -343,29 +350,45 @@ class BibleApp {
         }
     }
 
-    onFontSizeChange(size) {
-        console.log('Font size change requested:', size);
+    increaseFontSize() {
+        if (this.currentFontSizeIndex < this.fontSizes.length - 1) {
+            this.currentFontSizeIndex++;
+            this.applyFontSize();
+            this.updateFontSizeButtons();
+        }
+    }
+
+    decreaseFontSize() {
+        if (this.currentFontSizeIndex > 0) {
+            this.currentFontSizeIndex--;
+            this.applyFontSize();
+            this.updateFontSizeButtons();
+        }
+    }
+
+    applyFontSize() {
+        const size = this.fontSizes[this.currentFontSizeIndex];
 
         // Map size names to actual font sizes
         const fontSizeMap = {
             'small': '0.875rem',
             'medium': '1rem',
             'large': '1.125rem',
-            'xlarge': '1.25rem'
+            'xlarge': '1.25rem',
+            'xxlarge': '1.5rem',
+            'xxxlarge': '1.75rem',
+            'huge': '2rem',
+            'massive': '2.5rem'
         };
 
         const fontSize = fontSizeMap[size] || '1rem';
-        console.log('Setting font size to:', fontSize);
 
         // Directly set font-size on all verse elements
         const allVerses = document.querySelectorAll('.verse');
-        console.log('Found', allVerses.length, 'verse elements');
 
         allVerses.forEach(verse => {
             verse.style.fontSize = fontSize;
         });
-
-        console.log('Font size applied to all verses');
 
         // Re-sync verse heights after font size change
         if (allVerses.length > 0) {
@@ -374,6 +397,12 @@ class BibleApp {
                 this.syncVerseHeights();
             }, 50);
         }
+    }
+
+    updateFontSizeButtons() {
+        // Disable buttons at the extremes
+        this.fontSizeDown.disabled = this.currentFontSizeIndex === 0;
+        this.fontSizeUp.disabled = this.currentFontSizeIndex === this.fontSizes.length - 1;
     }
 
     navigateBook(direction) {
@@ -448,6 +477,9 @@ class BibleApp {
             </div>
         `;
         this.updateNavigationButtons();
+        // Disable font size buttons on welcome page
+        this.fontSizeDown.disabled = true;
+        this.fontSizeUp.disabled = true;
     }
 
     clearContent() {
