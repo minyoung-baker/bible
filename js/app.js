@@ -128,7 +128,7 @@ class BibleApp {
 
     populateBookSelect() {
         // Clear existing options except the first one
-        this.bookSelect.innerHTML = '<option value="">Select a book...</option>';
+        this.bookSelect.innerHTML = '<option value="">Book...</option>';
 
         this.englishData.books.forEach((englishBook, index) => {
             const koreanBook = this.koreanData.books[index];
@@ -141,9 +141,9 @@ class BibleApp {
 
     onBookChange(bookIndex) {
         if (bookIndex === '') {
-            this.chapterSelect.innerHTML = '<option value="">Select a chapter...</option>';
+            this.chapterSelect.innerHTML = '<option value="">Chapter...</option>';
             this.chapterSelect.disabled = true;
-            this.verseSelect.innerHTML = '<option value="">Go to verse...</option>';
+            this.verseSelect.innerHTML = '<option value="">Verse...</option>';
             this.verseSelect.disabled = true;
             this.clearContent();
             this.updateNavigationButtons();
@@ -154,7 +154,7 @@ class BibleApp {
 
         // Reset verse selector BEFORE populating chapters
         // (populateChapterSelect may auto-select and populate verses for single-chapter books)
-        this.verseSelect.innerHTML = '<option value="">Go to verse...</option>';
+        this.verseSelect.innerHTML = '<option value="">Verse...</option>';
         this.verseSelect.disabled = true;
 
         this.populateChapterSelect();
@@ -162,7 +162,7 @@ class BibleApp {
     }
 
     populateChapterSelect() {
-        this.chapterSelect.innerHTML = '<option value="">Select a chapter...</option>';
+        this.chapterSelect.innerHTML = '<option value="">Chapter...</option>';
 
         const englishBook = this.englishData.books[this.currentBookIndex];
 
@@ -307,7 +307,7 @@ class BibleApp {
 
     populateVerseSelect(verseCount) {
         // Clear and populate verse selector
-        this.verseSelect.innerHTML = '<option value="">Go to verse...</option>';
+        this.verseSelect.innerHTML = '<option value="">Verse...</option>';
 
         for (let i = 1; i <= verseCount; i++) {
             const option = document.createElement('option');
