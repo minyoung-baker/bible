@@ -141,9 +141,9 @@ class BibleApp {
 
     onBookChange(bookIndex) {
         if (bookIndex === '') {
-            this.chapterSelect.innerHTML = '<option value="">Chapter...</option>';
+            this.chapterSelect.innerHTML = '<option value="">&mdash;</option>';
             this.chapterSelect.disabled = true;
-            this.verseSelect.innerHTML = '<option value="">Verse...</option>';
+            this.verseSelect.innerHTML = '<option value="">&mdash;</option>';
             this.verseSelect.disabled = true;
             this.clearContent();
             this.updateNavigationButtons();
@@ -154,7 +154,7 @@ class BibleApp {
 
         // Reset verse selector BEFORE populating chapters
         // (populateChapterSelect may auto-select and populate verses for single-chapter books)
-        this.verseSelect.innerHTML = '<option value="">Verse...</option>';
+        this.verseSelect.innerHTML = '<option value="">&mdash;</option>';
         this.verseSelect.disabled = true;
 
         this.populateChapterSelect();
@@ -162,14 +162,14 @@ class BibleApp {
     }
 
     populateChapterSelect() {
-        this.chapterSelect.innerHTML = '<option value="">Chapter...</option>';
+        this.chapterSelect.innerHTML = '<option value="">&mdash;</option>';
 
         const englishBook = this.englishData.books[this.currentBookIndex];
 
         englishBook.chapters.forEach((chapter, index) => {
             const option = document.createElement('option');
             option.value = index;
-            option.textContent = `Chapter ${chapter.number}`;
+            option.textContent = `Ch. ${chapter.number}`;
             this.chapterSelect.appendChild(option);
         });
 
@@ -307,12 +307,12 @@ class BibleApp {
 
     populateVerseSelect(verseCount) {
         // Clear and populate verse selector
-        this.verseSelect.innerHTML = '<option value="">Verse...</option>';
+        this.verseSelect.innerHTML = '<option value="">&mdash;</option>';
 
         for (let i = 1; i <= verseCount; i++) {
             const option = document.createElement('option');
             option.value = i;
-            option.textContent = `Verse ${i}`;
+            option.textContent = `v. ${i}`;
             this.verseSelect.appendChild(option);
         }
 
