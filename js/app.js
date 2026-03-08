@@ -202,32 +202,37 @@ class BibleApp {
         this.englishText.innerHTML = '';
         this.koreanText.innerHTML = '';
 
-        // Get verse counts for both languages
-        const englishVerseCount = englishChapter.verses.length;
-        const koreanVerseCount = koreanChapter.verses.length;
-        const maxVerseCount = Math.max(englishVerseCount, koreanVerseCount);
+        // Build verse-number-keyed maps for alignment (handles skipped verse numbers)
+        const englishVerseMap = {};
+        englishChapter.verses.forEach(v => { englishVerseMap[v.number] = v; });
+        const koreanVerseMap = {};
+        koreanChapter.verses.forEach(v => { koreanVerseMap[v.number] = v; });
 
-        // Populate verse selector with the maximum verse count
-        this.populateVerseSelect(maxVerseCount);
+        // Union of all verse numbers, sorted numerically
+        const allVerseNumbers = [...new Set([
+            ...Object.keys(englishVerseMap),
+            ...Object.keys(koreanVerseMap)
+        ])].map(Number).sort((a, b) => a - b);
 
         // Check for mismatch and display warning if present
-        if (englishVerseCount !== koreanVerseCount) {
-            console.warn(`Verse count mismatch in ${englishBook.name} Chapter ${englishChapter.number}: English=${englishVerseCount}, Korean=${koreanVerseCount}`);
+        if (englishChapter.verses.length !== koreanChapter.verses.length) {
+            console.warn(`Verse count mismatch in ${englishBook.name} Chapter ${englishChapter.number}: English=${englishChapter.verses.length}, Korean=${koreanChapter.verses.length}`);
         }
 
-        // Display verses - iterate through all verses from both languages
-        for (let i = 0; i < maxVerseCount; i++) {
-            const englishVerse = englishChapter.verses[i];
-            const koreanVerse = koreanChapter.verses[i];
+        // Populate verse selector with actual verse numbers
+        this.populateVerseSelect(allVerseNumbers);
 
-            // English verse (or placeholder if missing)
-            if (englishVerse) {
+        // Display verses aligned by verse number
+        allVerseNumbers.forEach(verseNum => {
+            const englishVerse = englishVerseMap[verseNum];
+            const koreanVerse = koreanVerseMap[verseNum];
+
+            // English verse (or placeholder if missing/empty)
+            if (englishVerse && englishVerse.text !== '[]') {
                 const englishVerseElement = this.createVerseElement(englishVerse.number, englishVerse.text);
                 this.englishText.appendChild(englishVerseElement);
             } else {
-                // Create placeholder for missing English verse
-                const verseNumber = i + 1;
-                const englishVerseElement = this.createVerseElement(verseNumber, '[Verse not available in English translation]', true);
+                const englishVerseElement = this.createVerseElement(verseNum, '[Verse not in this translation]', true);
                 this.englishText.appendChild(englishVerseElement);
             }
 
@@ -236,12 +241,10 @@ class BibleApp {
                 const koreanVerseElement = this.createVerseElement(koreanVerse.number, koreanVerse.text);
                 this.koreanText.appendChild(koreanVerseElement);
             } else {
-                // Create placeholder for missing Korean verse
-                const verseNumber = i + 1;
-                const koreanVerseElement = this.createVerseElement(verseNumber, '[한국어 번역에서 사용할 수 없는 구절]', true);
+                const koreanVerseElement = this.createVerseElement(verseNum, '[한국어 번역에서 사용할 수 없는 구절]', true);
                 this.koreanText.appendChild(koreanVerseElement);
             }
-        }
+        });
 
         // Reset scroll position
         document.querySelector('.english-column').scrollTop = 0;
@@ -305,16 +308,16 @@ class BibleApp {
         return verseDiv;
     }
 
-    populateVerseSelect(verseCount) {
+    populateVerseSelect(verseNumbers) {
         // Clear and populate verse selector
         this.verseSelect.innerHTML = '<option value="">&mdash;</option>';
 
-        for (let i = 1; i <= verseCount; i++) {
+        verseNumbers.forEach(num => {
             const option = document.createElement('option');
-            option.value = i;
-            option.textContent = `v. ${i}`;
+            option.value = num;
+            option.textContent = `v. ${num}`;
             this.verseSelect.appendChild(option);
-        }
+        });
 
         this.verseSelect.disabled = false;
     }
