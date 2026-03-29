@@ -1,4 +1,6 @@
 // Bible App - Main JavaScript
+const VERSION = '1.1.0';
+
 class BibleApp {
     constructor() {
         this.englishData = null;
@@ -6,6 +8,7 @@ class BibleApp {
         this.currentBookIndex = null;
         this.currentChapterIndex = null;
         this.isSyncing = false;
+        this.isRestoringPosition = false;
 
         // Font size management
         this.fontSizes = ['small', 'medium', 'large', 'xlarge', 'xxlarge', 'xxxlarge', 'huge', 'massive'];
@@ -116,6 +119,9 @@ class BibleApp {
     }
 
     syncScroll(source, target) {
+        if (this.isRestoringPosition) {
+            return;
+        }
         if (this.isSyncing) {
             this.isSyncing = false;
             return;
@@ -291,14 +297,18 @@ class BibleApp {
     getTopVisibleVerse() {
         const englishColumn = document.querySelector('.english-column');
         const verses = this.englishText.querySelectorAll('.verse');
-        const columnTop = englishColumn.scrollTop;
+        const columnScrollTop = englishColumn.scrollTop;
+        const columnOffsetTop = englishColumn.offsetTop;
 
         for (const verse of verses) {
-            // Find the first verse whose bottom edge is below the scroll position
-            if (verse.offsetTop + verse.offsetHeight > columnTop) {
+            // verse.offsetTop is relative to body; subtract column's offsetTop to get column-relative position
+            const verseTop = verse.offsetTop - columnOffsetTop;
+            const verseBottom = verseTop + verse.offsetHeight;
+
+            if (verseBottom > columnScrollTop) {
                 const verseNum = verse.getAttribute('data-verse');
-                // Calculate how far into this verse we've scrolled (0 to 1)
-                const fractionalOffset = (columnTop - verse.offsetTop) / verse.offsetHeight;
+                // Fraction of verse scrolled past (0 = at top, 1 = fully scrolled past)
+                const fractionalOffset = (columnScrollTop - verseTop) / verse.offsetHeight;
                 return { verseNum, fractionalOffset: Math.max(0, fractionalOffset) };
             }
         }
@@ -312,10 +322,17 @@ class BibleApp {
         const koreanVerse = this.koreanText.querySelector(`[data-verse="${topVerse.verseNum}"]`);
 
         if (englishVerse && koreanVerse) {
-            this.isSyncing = true;
-            englishColumn.scrollTop = englishVerse.offsetTop + (topVerse.fractionalOffset * englishVerse.offsetHeight);
-            koreanColumn.scrollTop = koreanVerse.offsetTop + (topVerse.fractionalOffset * koreanVerse.offsetHeight);
-            setTimeout(() => { this.isSyncing = false; }, 100);
+            // Force reflow so offsetTop values reflect the new layout after syncVerseHeights
+            void this.englishText.offsetHeight;
+
+            const englishTop = englishVerse.offsetTop - englishColumn.offsetTop;
+            const koreanTop = koreanVerse.offsetTop - koreanColumn.offsetTop;
+
+            // Use isRestoringPosition (not isSyncing) so syncScroll ignores both scroll events
+            this.isRestoringPosition = true;
+            englishColumn.scrollTop = englishTop + (topVerse.fractionalOffset * englishVerse.offsetHeight);
+            koreanColumn.scrollTop = koreanTop + (topVerse.fractionalOffset * koreanVerse.offsetHeight);
+            setTimeout(() => { this.isRestoringPosition = false; }, 100);
         }
     }
 
@@ -497,6 +514,7 @@ class BibleApp {
         const welcomeHTML = `
             <div class="empty-state">
                 <p>Welcome to the English-Korean Bible</p>
+                <p style="font-size: 0.8em; opacity: 0.6;">v${VERSION}</p>
                 <p>Select a book and chapter to begin reading</p>
                 <p>English translation from <a href="https://github.com/thiagobodruk/bible/blob/master/json/en_bbe.json">https://github.com/thiagobodruk</a></p>
                 <p>Korean translation from <a href="https://github.com/thiagobodruk/bible/blob/master/json/ko_ko.json">https://github.com/thiagobodruk</a></p>
