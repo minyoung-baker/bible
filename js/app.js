@@ -1,5 +1,5 @@
 // Bible App - Main JavaScript
-const VERSION = '1.1.1';
+const VERSION = '1.1.2';
 
 class BibleApp {
     constructor() {
@@ -9,7 +9,7 @@ class BibleApp {
         this.currentChapterIndex = null;
         this.isSyncing = false;
         this.isRestoringPosition = false;
-        this.savedTopVerse = null;
+        this.currentTopVerse = null;
 
         // Font size management
         this.fontSizes = ['small', 'medium', 'large', 'xlarge', 'xxlarge', 'xxxlarge', 'huge', 'massive'];
@@ -91,41 +91,30 @@ class BibleApp {
         this.prevChapterBtn.addEventListener('click', () => this.navigateChapter(-1));
         this.nextChapterBtn.addEventListener('click', () => this.navigateChapter(1));
 
-        // Synchronized scrolling
+        // Synchronized scrolling; track current top verse continuously so rotation
+        // always restores to wherever the user actually is, regardless of how they got there.
         const englishColumn = document.querySelector('.english-column');
         const koreanColumn = document.querySelector('.korean-column');
 
         englishColumn.addEventListener('scroll', () => {
             this.syncScroll(englishColumn, koreanColumn);
+            this.currentTopVerse = this.getTopVisibleVerse();
         });
 
         koreanColumn.addEventListener('scroll', () => {
             this.syncScroll(koreanColumn, englishColumn);
         });
 
-        // Capture scroll position before orientation changes (fires before layout changes)
-        window.addEventListener('orientationchange', () => {
-            if (this.englishText.children.length > 0) {
-                this.savedTopVerse = this.getTopVisibleVerse();
-            }
-        });
-
-        // Re-sync verse heights on window resize, preserving top visible verse.
-        // For non-orientation resizes, capture position on the FIRST resize event
-        // (before the debounce fires and the layout has settled into its new state).
+        // Re-sync verse heights on window resize and restore the tracked position.
         let resizeTimeout = null;
         window.addEventListener('resize', () => {
-            if (resizeTimeout === null && this.savedTopVerse === null && this.englishText.children.length > 0) {
-                this.savedTopVerse = this.getTopVisibleVerse();
-            }
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
                 resizeTimeout = null;
                 if (this.englishText.children.length > 0) {
+                    const verseToRestore = this.currentTopVerse;
                     this.syncVerseHeights();
-                    if (this.savedTopVerse !== null) {
-                        const verseToRestore = this.savedTopVerse;
-                        this.savedTopVerse = null;
+                    if (verseToRestore !== null) {
                         requestAnimationFrame(() => {
                             this.scrollToVersePosition(verseToRestore);
                         });
@@ -273,7 +262,8 @@ class BibleApp {
             }
         });
 
-        // Reset scroll position
+        // Reset scroll position and top-verse tracking for this new chapter
+        this.currentTopVerse = null;
         document.querySelector('.english-column').scrollTop = 0;
         document.querySelector('.korean-column').scrollTop = 0;
 
