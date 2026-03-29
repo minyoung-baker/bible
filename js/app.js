@@ -99,13 +99,17 @@ class BibleApp {
             this.syncScroll(koreanColumn, englishColumn);
         });
 
-        // Re-sync verse heights on window resize
+        // Re-sync verse heights on window resize, preserving top visible verse
         let resizeTimeout;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
                 if (this.englishText.children.length > 0) {
+                    const topVerse = this.getTopVisibleVerse();
                     this.syncVerseHeights();
+                    if (topVerse !== null) {
+                        this.scrollToVersePosition(topVerse);
+                    }
                 }
             }, 250);
         });
@@ -282,6 +286,37 @@ class BibleApp {
             englishVerse.style.minHeight = `${maxHeight}px`;
             koreanVerse.style.minHeight = `${maxHeight}px`;
         });
+    }
+
+    getTopVisibleVerse() {
+        const englishColumn = document.querySelector('.english-column');
+        const verses = this.englishText.querySelectorAll('.verse');
+        const columnTop = englishColumn.scrollTop;
+
+        for (const verse of verses) {
+            // Find the first verse whose bottom edge is below the scroll position
+            if (verse.offsetTop + verse.offsetHeight > columnTop) {
+                const verseNum = verse.getAttribute('data-verse');
+                // Calculate how far into this verse we've scrolled (0 to 1)
+                const fractionalOffset = (columnTop - verse.offsetTop) / verse.offsetHeight;
+                return { verseNum, fractionalOffset: Math.max(0, fractionalOffset) };
+            }
+        }
+        return null;
+    }
+
+    scrollToVersePosition(topVerse) {
+        const englishColumn = document.querySelector('.english-column');
+        const koreanColumn = document.querySelector('.korean-column');
+        const englishVerse = this.englishText.querySelector(`[data-verse="${topVerse.verseNum}"]`);
+        const koreanVerse = this.koreanText.querySelector(`[data-verse="${topVerse.verseNum}"]`);
+
+        if (englishVerse && koreanVerse) {
+            this.isSyncing = true;
+            englishColumn.scrollTop = englishVerse.offsetTop + (topVerse.fractionalOffset * englishVerse.offsetHeight);
+            koreanColumn.scrollTop = koreanVerse.offsetTop + (topVerse.fractionalOffset * koreanVerse.offsetHeight);
+            setTimeout(() => { this.isSyncing = false; }, 100);
+        }
     }
 
     createVerseElement(number, text, isMissing = false) {
