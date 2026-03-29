@@ -1,5 +1,5 @@
 // Bible App - Main JavaScript
-const VERSION = '1.1.0';
+const VERSION = '1.1.1';
 
 class BibleApp {
     constructor() {
@@ -9,6 +9,7 @@ class BibleApp {
         this.currentChapterIndex = null;
         this.isSyncing = false;
         this.isRestoringPosition = false;
+        this.savedTopVerse = null;
 
         // Font size management
         this.fontSizes = ['small', 'medium', 'large', 'xlarge', 'xxlarge', 'xxxlarge', 'huge', 'massive'];
@@ -102,16 +103,32 @@ class BibleApp {
             this.syncScroll(koreanColumn, englishColumn);
         });
 
-        // Re-sync verse heights on window resize, preserving top visible verse
-        let resizeTimeout;
+        // Capture scroll position before orientation changes (fires before layout changes)
+        window.addEventListener('orientationchange', () => {
+            if (this.englishText.children.length > 0) {
+                this.savedTopVerse = this.getTopVisibleVerse();
+            }
+        });
+
+        // Re-sync verse heights on window resize, preserving top visible verse.
+        // For non-orientation resizes, capture position on the FIRST resize event
+        // (before the debounce fires and the layout has settled into its new state).
+        let resizeTimeout = null;
         window.addEventListener('resize', () => {
+            if (resizeTimeout === null && this.savedTopVerse === null && this.englishText.children.length > 0) {
+                this.savedTopVerse = this.getTopVisibleVerse();
+            }
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
+                resizeTimeout = null;
                 if (this.englishText.children.length > 0) {
-                    const topVerse = this.getTopVisibleVerse();
                     this.syncVerseHeights();
-                    if (topVerse !== null) {
-                        this.scrollToVersePosition(topVerse);
+                    if (this.savedTopVerse !== null) {
+                        const verseToRestore = this.savedTopVerse;
+                        this.savedTopVerse = null;
+                        requestAnimationFrame(() => {
+                            this.scrollToVersePosition(verseToRestore);
+                        });
                     }
                 }
             }, 250);
