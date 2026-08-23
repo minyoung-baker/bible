@@ -105,6 +105,11 @@ select:focus {
     outline-offset: 2px;
 }
 
+#chapterSelect,
+#verseSelect {
+    min-width: 70px;
+}
+
 /* Main Content */
 main {
     padding: 0;
@@ -256,8 +261,10 @@ main {
         flex: 1;
     }
 
+    #chapterSelect,
     #verseSelect {
-        min-width: 70px;
+        min-width: 60px;
+        flex: 0 1 60px;
     }
 
     #fontSizeSelect {

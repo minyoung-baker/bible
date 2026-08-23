@@ -1,5 +1,5 @@
 // Bible App - Main JavaScript
-const VERSION = '1.1.2';
+const VERSION = '1.1.3';
 
 class BibleApp {
     constructor() {
@@ -23,10 +23,6 @@ class BibleApp {
         this.fontSizeUp = document.getElementById('fontSizeUp');
         this.englishText = document.getElementById('englishText');
         this.koreanText = document.getElementById('koreanText');
-        this.prevBookBtn = document.getElementById('prevBook');
-        this.nextBookBtn = document.getElementById('nextBook');
-        this.prevChapterBtn = document.getElementById('prevChapter');
-        this.nextChapterBtn = document.getElementById('nextChapter');
 
         this.init();
     }
@@ -84,12 +80,6 @@ class BibleApp {
         // Font size buttons
         this.fontSizeDown.addEventListener('click', () => this.decreaseFontSize());
         this.fontSizeUp.addEventListener('click', () => this.increaseFontSize());
-
-        // Navigation buttons
-        this.prevBookBtn.addEventListener('click', () => this.navigateBook(-1));
-        this.nextBookBtn.addEventListener('click', () => this.navigateBook(1));
-        this.prevChapterBtn.addEventListener('click', () => this.navigateChapter(-1));
-        this.nextChapterBtn.addEventListener('click', () => this.navigateChapter(1));
 
         // Synchronized scrolling; track current top verse continuously so rotation
         // always restores to wherever the user actually is, regardless of how they got there.
@@ -162,7 +152,6 @@ class BibleApp {
             this.verseSelect.innerHTML = '<option value="">&mdash;</option>';
             this.verseSelect.disabled = true;
             this.clearContent();
-            this.updateNavigationButtons();
             return;
         }
 
@@ -174,7 +163,6 @@ class BibleApp {
         this.verseSelect.disabled = true;
 
         this.populateChapterSelect();
-        this.updateNavigationButtons();
     }
 
     populateChapterSelect() {
@@ -199,13 +187,11 @@ class BibleApp {
     onChapterChange(chapterIndex) {
         if (chapterIndex === '') {
             this.clearContent();
-            this.updateNavigationButtons();
             return;
         }
 
         this.currentChapterIndex = parseInt(chapterIndex);
         this.displayChapter();
-        this.updateNavigationButtons();
     }
 
     displayChapter() {
@@ -467,56 +453,6 @@ class BibleApp {
         this.fontSizeUp.disabled = this.currentFontSizeIndex === this.fontSizes.length - 1;
     }
 
-    navigateBook(direction) {
-        // If no book is selected, handle "next" button to go to Genesis
-        if (this.currentBookIndex === null) {
-            if (direction === 1) {
-                this.bookSelect.value = 0;
-                this.onBookChange(0);
-            }
-            return;
-        }
-
-        const newIndex = this.currentBookIndex + direction;
-        if (newIndex >= 0 && newIndex < this.englishData.books.length) {
-            this.bookSelect.value = newIndex;
-            this.onBookChange(newIndex);
-        }
-    }
-
-    navigateChapter(direction) {
-        if (this.currentBookIndex === null || this.currentChapterIndex === null) return;
-
-        const englishBook = this.englishData.books[this.currentBookIndex];
-        const newChapterIndex = this.currentChapterIndex + direction;
-
-        if (newChapterIndex >= 0 && newChapterIndex < englishBook.chapters.length) {
-            this.chapterSelect.value = newChapterIndex;
-            this.onChapterChange(newChapterIndex);
-        }
-    }
-
-    updateNavigationButtons() {
-        // Update book navigation buttons
-        if (this.currentBookIndex === null) {
-            this.prevBookBtn.disabled = true;
-            this.nextBookBtn.disabled = false; // Enable next button to navigate to Genesis
-        } else {
-            this.prevBookBtn.disabled = this.currentBookIndex === 0;
-            this.nextBookBtn.disabled = this.currentBookIndex === this.englishData.books.length - 1;
-        }
-
-        // Update chapter navigation buttons
-        if (this.currentBookIndex === null || this.currentChapterIndex === null) {
-            this.prevChapterBtn.disabled = true;
-            this.nextChapterBtn.disabled = true;
-        } else {
-            const englishBook = this.englishData.books[this.currentBookIndex];
-            this.prevChapterBtn.disabled = this.currentChapterIndex === 0;
-            this.nextChapterBtn.disabled = this.currentChapterIndex === englishBook.chapters.length - 1;
-        }
-    }
-
     showWelcomeMessage() {
         const welcomeHTML = `
             <div class="empty-state">
@@ -539,7 +475,6 @@ class BibleApp {
                 <p>읽기 시작하려면 책과 장을 선택하세요</p>
             </div>
         `;
-        this.updateNavigationButtons();
         // Disable font size buttons on welcome page
         this.fontSizeDown.disabled = true;
         this.fontSizeUp.disabled = true;
