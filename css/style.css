@@ -11,6 +11,14 @@
     --verse-font-size: 1rem;
 }
 
+/* Prevent mobile browsers from auto-inflating text size when column width
+   changes on rotation (e.g. WebKit's text-size-adjust: auto), which made
+   verse text visually "zoom" between portrait and landscape. */
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
 /* Reset and Base Styles */
 * {
     margin: 0;
